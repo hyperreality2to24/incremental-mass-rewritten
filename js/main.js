@@ -63,73 +63,7 @@ const FORMS = {
 
         return x
     },
-    massSoftGain() {
-        let s = E(1.5e156)
-        if (CHALS.inChal(3) || CHALS.inChal(10) || FERMIONS.onActive("03")) s = s.div(1e150)
-        if (CHALS.inChal(4) || CHALS.inChal(10) || FERMIONS.onActive("03")) s = s.div(1e100)
-        if (player.mainUpg.bh.includes(7)) s = s.mul(tmp.upgs.main?tmp.upgs.main[2][7].effect:E(1))
-        if (player.mainUpg.rp.includes(13)) s = s.mul(tmp.upgs.main?tmp.upgs.main[1][13].effect:E(1))
-        if (hasPrestige(0,1)) s = s.pow(10)
-        return s.min(tmp.massSoftGain2||1/0)
-    },
-    massSoftPower() {
-        let p = E(1/3)
-        if (CHALS.inChal(3) || CHALS.inChal(10) || FERMIONS.onActive("03")) p = p.mul(4)
-        if (CHALS.inChal(7) || CHALS.inChal(10)) p = p.mul(6)
-        if (player.mainUpg.bh.includes(11)) p = p.mul(0.9)
-        if (player.ranks.rank.gte(800)) p = p.mul(RANKS.effect.rank[800]())
-        return E(1).div(p.add(1))
-    },
-    massSoftGain2() {
-        let s = E('1.5e1000056')
-        if (hasTree("m2")) s = s.pow(1.5)
-        if (hasTree("m2")) s = s.pow(tmp.supernova.tree_eff.m3)
-        if (player.ranks.tetr.gte(8)) s = s.pow(1.5)
-
-        s = s.pow(tmp.bosons.effect.neg_w[0])
-        if (hasPrestige(0,1)) s = s.pow(10)
-
-        return s.min(tmp.massSoftGain3||1/0)
-    },
-    massSoftPower2() {
-        let p = E(player.qu.rip.active ? 0.1 : 0.25)
-        if (hasElement(51)) p = p.pow(0.9)
-        return p
-    },
-    massSoftGain3() {
-        let s = player.qu.rip.active ? uni("ee7") : uni("ee8")
-        if (hasTree("m3")) s = s.pow(tmp.supernova.tree_eff.m3)
-        s = s.pow(tmp.radiation.bs.eff[2])
-        if (hasPrestige(0,1)) s = s.pow(10)
-        return s
-    },
-    massSoftPower3() {
-        let p = E(player.qu.rip.active ? 0.1 : 0.2)
-        if (hasElement(77)) p = p.pow(player.qu.rip.active?0.95:0.825)
-        return p
-    },
-    massSoftGain4() {
-        let s = mlt(player.qu.rip.active ? 0.1 : 1e4)
-        if (player.ranks.pent.gte(8)) s = s.pow(RANKS.effect.pent[8]())
-        if (hasTree('qc1')) s = s.pow(treeEff('qc1'))
-        if (hasPrestige(0,1)) s = s.pow(10)
-        return s
-    },
-    massSoftPower4() {
-        let p = E(0.1)
-        if (hasElement(100)) p = p.pow(player.qu.rip.active?0.8:0.5)
-        return p
-    },
-    massSoftGain5() {
-        let s = mlt(player.qu.rip.active?1e4:1e12)
-        if (hasPrestige(0,8)) s = s.pow(prestigeEff(0,8))
-        if (hasUpgrade("br",12)) s = s.pow(upgEffect(4,12))
-        return s
-    },
-    massSoftPower5() {
-        let p = E(0.05)
-        return p
-    },
+    
     tickspeed: {
         cost(x=player.tickspeed) { return E(2).pow(x).floor() },
         can() { return player.rp.points.gte(tmp.tickspeedCost) && !CHALS.inChal(2) && !CHALS.inChal(6) && !CHALS.inChal(10) },
