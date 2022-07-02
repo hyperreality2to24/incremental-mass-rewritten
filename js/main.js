@@ -57,11 +57,7 @@ const FORMS = {
         if (QCs.active()) x = x.pow(tmp.qu.qc_eff[4])
 
         if (CHALS.inChal(9) || FERMIONS.onActive("12")) x = expMult(x,0.9)
-        x = x.softcap(tmp.massSoftGain,tmp.massSoftPower,0)
-        .softcap(tmp.massSoftGain2,tmp.massSoftPower2,0)
-        .softcap(tmp.massSoftGain3,tmp.massSoftPower3,0)
-        .softcap(tmp.massSoftGain4,tmp.massSoftPower4,0)
-        .softcap(tmp.massSoftGain5,tmp.massSoftPower5,0)
+
 
         if (hasElement(117)) x = x.pow(10)
 
